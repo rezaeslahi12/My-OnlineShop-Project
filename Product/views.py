@@ -63,7 +63,7 @@ def Post_Like(request,id):
         post.like.add(user)
         return redirect('detail',id)
     else:
-        return HttpResponse('you Are Not Like This Post please Login')
+        return HttpResponse('you Are Not Like This Post please Login!')
 
 def Post_UnLike(request,id):
     post = product.objects.get(id=id)
