@@ -1,0 +1,51 @@
+{% extends 'base.html'%}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    <form action="{% url 'accounts:logout' %}" method="POST">
+        {% csrf_token %}
+        <h1>{{user.username}}</h1>
+        </form>
+    {% endif %}
+    <h1>this is my shop</h1>
+    <ul>
+    <div class="row row-cols-auto postproduct">
+        {% for product in Product %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="{{product.image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{product.title}}</h5>
+                <p class="card-text">{{product.getsnippet}}</p>
+                <a href="{% url 'detail' product.id %}" class="btn btn-primary">Detail</a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+    
+    </ul> 
+    <a href="additem">additem</a>
+    {% if user.is_authenticated %}
+        <form action="{% url 'accounts:logout' %}" method="POST">
+        <button type="submit">log out</button>
+        {% csrf_token %}
+        </form>
+    {% else %}
+        <form action="{% url 'accounts:signin' %}" method="POST">
+        <button type="submit">Log in</button>
+        {% csrf_token %}
+        </form>
+        {% endif %}
+    
+{% endblock content %}
+
+
+
+
+
+
+
+<!-- <input type="text" placeholder="P_name" name="P_name">
+        <input type="text" placeholder="discrption" name="discrption">
+        <input type="text" placeholder="price" name="price"> -->

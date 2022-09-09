@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}ProductDetail{% endblock %}
+{% block content %}
+<h1>
+    {{product.P_name}}
+</h1>
+<p>
+    {{product.discrption}}<br><br>
+    Price:{{product.price}}<br><br>
+    Date:{{product.date}}  
+</p>
+
+<img src="{{product.image.url}}" alt="">
+{% if user in product.like.all %}
+    <a href="{% url 'postulike' product.id %}">Unlike</a>
+{% else %}
+    <a href="{% url 'postlike' product.id %}">like</a>
+{% endif %}
+{% endblock content %}
